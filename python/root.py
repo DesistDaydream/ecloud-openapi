@@ -13,7 +13,7 @@ from ecloudsdkcore.config.config import Config
 from ecloudsdkvpc.v1.model import *
 from ecloudsdkvpc.v1.client import Client
 
-import yaml
+from config import config
 
 
 @dataclass
@@ -49,7 +49,7 @@ class ListSecurityGroupRuleResp:
     state: str
 
 
-def create_client(access_key: str, access_secret: str, pool_id: str) -> Client:
+def createClient(access_key: str, access_secret: str, pool_id: str) -> Client:
     """
     使用AK&SK初始化账号Client
     @param access_key:
@@ -75,6 +75,7 @@ class VPCHandler:
         resp: ListSecurityGroupRuleResp = client.list_security_group_rule(request)
         print("当前共有 {} 条规则".format(len(resp.body.content)))
 
+    @staticmethod
     def CreateSecurityRule(args: List[str], client: Client) -> None:
         request = CreateSecurityRuleRequest()
         create_security_rule_body = CreateSecurityRuleBody()
@@ -94,12 +95,13 @@ class VPCHandler:
 
 
 if __name__ == "__main__":
-    with open("pkg/config/my_config.yaml", "r") as file:
-        yaml_data = yaml.safe_load(file)
+    configFile = "pkg/config/my_config.yaml"
 
-    client = create_client(
-        yaml_data["ak"],
-        yaml_data["sk"],
+    configData = config.LoadConfig(configFile)
+
+    client = createClient(
+        configData["ak"],
+        configData["sk"],
         "CIDC-RP-25",
     )
 
