@@ -29,7 +29,7 @@ func createClient(accessKey string, secretKey string, poolId string) *ecloudsdkv
 }
 
 func main() {
-	user := "BJYHL03"
+	user := ""
 	auth := myconfig.NewAuthInfo("config/my_config.yaml")
 
 	ak := auth.AuthList[user].AccessKey
