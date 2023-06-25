@@ -11,9 +11,9 @@ func listCommand() *cobra.Command {
 	long := ``
 	listCmd := &cobra.Command{
 		Use:   "list",
-		Short: "安全组",
+		Short: "查询安全组规则列表",
 		Long:  long,
-		Run:   securityGroupList,
+		Run:   securityGroupGet,
 	}
 
 	listCmd.AddCommand()
@@ -21,7 +21,7 @@ func listCommand() *cobra.Command {
 	return listCmd
 }
 
-func securityGroupList(cmd *cobra.Command, args []string) {
+func securityGroupGet(cmd *cobra.Command, args []string) {
 	request := &model.ListSecurityGroupRespRequest{}
 	response, err := vpcClient.ListSecurityGroupResp(request)
 	if err == nil {

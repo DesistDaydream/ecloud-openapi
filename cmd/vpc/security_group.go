@@ -18,6 +18,9 @@ func SecurityGroupCommand() *cobra.Command {
 
 	securityGroupCmd.AddCommand(
 		listCommand(),
+		getCommand(),
+		ruleGetCommand(),
+		ruleCreateCommand(),
 	)
 
 	securityGroupCmd.PersistentFlags().StringVarP(&securityGroupFlags.test, "test", "t", "", "测试标志")
