@@ -1,0 +1,7 @@
+authList:
+  ${UserNAME1}:
+    ak: "AAAAAAA"
+    sk: "BBBBBBBB"
+  ${UserNAME2}:
+    ak: "AAAAAAA"
+    sk: "BBBBBBBB"

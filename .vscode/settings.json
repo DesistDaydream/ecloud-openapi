@@ -1,4 +1,4 @@
 {
     "python.formatting.provider": "black",
-    "explorer.autoReveal": false,
+    // "explorer.autoReveal": false,
 }
