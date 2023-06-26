@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"gitlab.ecloud.com/ecloud/ecloudsdkcore/position"
 	"gitlab.ecloud.com/ecloud/ecloudsdkvpc/model"
 )
 
@@ -34,7 +33,6 @@ func securityGroupRuleCreate(cmd *cobra.Command, args []string) {
 
 	request := &model.CreateSecurityRuleRequest{
 		CreateSecurityRuleBody: &model.CreateSecurityRuleBody{
-			Body:            position.Body{},
 			SecurityGroupId: &securityGroupId,
 			RemoteType:      (*model.CreateSecurityRuleBodyRemoteTypeEnum)(&remoteType),
 			Protocol:        (*model.CreateSecurityRuleBodyProtocolEnum)(&protocol),
