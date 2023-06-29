@@ -22,8 +22,6 @@ func ruleCreateCommand() *cobra.Command {
 }
 
 func securityGroupRuleCreate(cmd *cobra.Command, args []string) {
-	securityGroupId := "11bb4bcc-cd95-4bed-9def-d2df9d528768"
-
 	remoteType := "cidr"
 	protocol := "ANY"
 	etherType := "IPv4"
@@ -33,7 +31,7 @@ func securityGroupRuleCreate(cmd *cobra.Command, args []string) {
 
 	request := &model.CreateSecurityRuleRequest{
 		CreateSecurityRuleBody: &model.CreateSecurityRuleBody{
-			SecurityGroupId: &securityGroupId,
+			SecurityGroupId: &securityGroupFlags.SecurityGroupID,
 			RemoteType:      (*model.CreateSecurityRuleBodyRemoteTypeEnum)(&remoteType),
 			Protocol:        (*model.CreateSecurityRuleBodyProtocolEnum)(&protocol),
 			EtherType:       (*model.CreateSecurityRuleBodyEtherTypeEnum)(&etherType),
