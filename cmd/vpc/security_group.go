@@ -11,6 +11,7 @@ import (
 type SecurityGroupFlags struct {
 	test              string
 	SecurityGroupName string
+	SecurityGroupFile string
 }
 
 var securityGroupFlags SecurityGroupFlags
@@ -32,6 +33,7 @@ func SecurityGroupCommand() *cobra.Command {
 
 	securityGroupCmd.PersistentFlags().StringVarP(&securityGroupFlags.test, "test", "t", "", "测试标志")
 	securityGroupCmd.PersistentFlags().StringVar(&securityGroupFlags.SecurityGroupName, "sg-name", "", "安全组名称")
+	securityGroupCmd.PersistentFlags().StringVar(&securityGroupFlags.SecurityGroupFile, "file", "", "安全组excel文件")
 
 	return securityGroupCmd
 }
