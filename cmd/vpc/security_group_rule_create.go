@@ -3,6 +3,7 @@ package vpc
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"gitlab.ecloud.com/ecloud/ecloudsdkvpc/model"
 )
@@ -22,6 +23,11 @@ func ruleCreateCommand() *cobra.Command {
 }
 
 func securityGroupRuleCreate(cmd *cobra.Command, args []string) {
+	sgID, err := findSecurityGroupID(securityGroupFlags.SecurityGroupName)
+	if err != nil {
+		logrus.Fatalf("获取安全组 ID 失败，原因: %v", err)
+	}
+
 	remoteType := "cidr"
 	protocol := "ANY"
 	etherType := "IPv4"
@@ -31,7 +37,7 @@ func securityGroupRuleCreate(cmd *cobra.Command, args []string) {
 
 	request := &model.CreateSecurityRuleRequest{
 		CreateSecurityRuleBody: &model.CreateSecurityRuleBody{
-			SecurityGroupId: &securityGroupFlags.SecurityGroupID,
+			SecurityGroupId: &sgID,
 			RemoteType:      (*model.CreateSecurityRuleBodyRemoteTypeEnum)(&remoteType),
 			Protocol:        (*model.CreateSecurityRuleBodyProtocolEnum)(&protocol),
 			EtherType:       (*model.CreateSecurityRuleBodyEtherTypeEnum)(&etherType),

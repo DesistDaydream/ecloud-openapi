@@ -3,6 +3,7 @@ package vpc
 import (
 	"fmt"
 
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"gitlab.ecloud.com/ecloud/ecloudsdkcore/position"
 	"gitlab.ecloud.com/ecloud/ecloudsdkvpc/model"
@@ -23,12 +24,15 @@ func getCommand() *cobra.Command {
 }
 
 func securityGroupList(cmd *cobra.Command, args []string) {
-	securityGroupId := "11bb4bcc-cd95-4bed-9def-d2df9d528768"
+	sgID, err := findSecurityGroupID(securityGroupFlags.SecurityGroupName)
+	if err != nil {
+		logrus.Fatalf("获取安全组 ID 失败，原因: %v", err)
+	}
 
 	request := &model.GetSecurityGroupDetailRespRequest{
 		GetSecurityGroupDetailRespPath: &model.GetSecurityGroupDetailRespPath{
 			Path:            position.Path{},
-			SecurityGroupId: &securityGroupId,
+			SecurityGroupId: &sgID,
 		},
 	}
 
